@@ -19,5 +19,4 @@ export class AppComponent {
   pauseTimer() {
     clearInterval(this.interval);
   }
-  
 }

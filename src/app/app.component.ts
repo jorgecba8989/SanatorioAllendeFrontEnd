@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Board } from './game/board';
 import { Cell } from './game/cell';
+import { ClockComponent } from './clock/clock.component';
 
 @Component({
   selector: 'app-root',
@@ -10,35 +11,26 @@ import { Cell } from './game/cell';
 
 export class AppComponent {
   title = 'Buscaminas';
-  time: number = 0;
-  interval: any;
   board!: Board;
+  @ViewChild(ClockComponent) c: ClockComponent | undefined;
 
 
   constructor( ) {
     this.reset()
   }
 
-  startTimer() {
-    this.interval = setInterval(() => {
-        this.time++;
-    },1000)
-  }
-
-  pauseTimer() {
-    clearInterval(this.interval);
-  }
+  
 
   checkCell(cell: Cell) {
-    if(this.time == 0){
-      this.startTimer();
+    if(this.c?.time == 0){
+      this.c?.startTimer()
     }
     const result = this.board.checkCell(cell);
     if (result === 'gameover') {
-      this.pauseTimer();
+      this.c?.pauseTimer();
       alert('Perdiste :(');
     } else if (result === 'win') {
-      this.pauseTimer();
+      this.c?.pauseTimer();
       alert('Ganaste :)');
     }
   }
@@ -53,8 +45,8 @@ export class AppComponent {
 
   reset() {
     this.board = new Board(5,10);
-    this.pauseTimer();
-    this.time = 0
+    this.c?.pauseTimer();
+    this.c?.resetTimer(); 
   }
 
 }

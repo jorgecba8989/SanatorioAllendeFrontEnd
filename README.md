@@ -21,3 +21,11 @@
 
 [Bootstrap 5.0](https://getbootstrap.com/)
 [SweetAlert2](https://sweetalert2.github.io/)
+
+
+
+### __En caso de error__
+
+![](img/error.png "error")
+
+**Si al momento de ejecutar el proyecto le sale un error como figura en la imagen, poner en la terminal del proyecto: npm install --save @angular-devkit/build-angular, esperar que se instale y lanzar nuevamente ng serve -o**

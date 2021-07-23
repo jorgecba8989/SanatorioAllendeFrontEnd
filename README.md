@@ -17,7 +17,7 @@
 
 
 
-### __Links utilizados__
+### __Links de las Tecnologias usadas__
 
 [Bootstrap 5.0](https://getbootstrap.com/)
 [SweetAlert2](https://sweetalert2.github.io/)

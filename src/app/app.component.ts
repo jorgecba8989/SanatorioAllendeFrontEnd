@@ -30,10 +30,15 @@ export class AppComponent {
   }
 
   checkCell(cell: Cell) {
+    if(this.time == 0){
+      this.startTimer();
+    }
     const result = this.board.checkCell(cell);
     if (result === 'gameover') {
+      this.pauseTimer();
       alert('Perdiste :(');
     } else if (result === 'win') {
+      this.pauseTimer();
       alert('Ganaste :)');
     }
   }
@@ -48,6 +53,8 @@ export class AppComponent {
 
   reset() {
     this.board = new Board(5,10);
+    this.pauseTimer();
+    this.time = 0
   }
 
 }

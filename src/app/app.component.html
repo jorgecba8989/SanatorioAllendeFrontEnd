@@ -1,4 +1,13 @@
 <span>{{time}}</span>
 <br>
+<div class="alert alert-success" role="alert">
+  <table>
+    <tr *ngFor="let row of board.cells; index as y">
+      <td *ngFor="let cell of row; index as x" >
+       
+      </td>
+    </tr>
+  </table>
+  <br>
 <button type="button" class="btn btn-primary" (click)="startTimer()">Start</button>
 <button type="button" class="btn btn-primary" (click)="pauseTimer()">Stop</button>

@@ -3,8 +3,13 @@
 <div class="alert alert-success" role="alert">
   <table>
     <tr *ngFor="let row of board.cells; index as y">
-      <td *ngFor="let cell of row; index as x" (click)="checkCell(cell)">
+      <td *ngFor="let cell of row; index as x" (click)="checkCell(cell)" (contextmenu)="$event.preventDefault(); flag(cell)">
         <div *ngIf="cell.status === 'clear' && !cell.mine">{{ cell.proximityMines }}</div>
+        <div *ngIf="cell.status === 'flag'">
+          <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="#FF0000" d="M14.4,6L14,4H5V21H7V14H12.6L13,16H20V6H14.4Z" />
+          </svg>
+        </div>
         <div *ngIf="cell.mine && cell.status === 'clear'">
           <svg style="width:24px;height:24px" >
             <path

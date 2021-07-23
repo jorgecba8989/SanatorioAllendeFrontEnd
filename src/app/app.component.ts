@@ -38,6 +38,14 @@ export class AppComponent {
     }
   }
 
+  flag(cell: Cell) {
+    if (cell.status === 'flag') {
+      cell.status = 'open';
+    } else {
+      cell.status = 'flag';
+    }
+  }
+
   reset() {
     this.board = new Board(5,10);
   }

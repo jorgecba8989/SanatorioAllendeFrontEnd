@@ -9,7 +9,9 @@ export class ClockComponent implements OnInit {
 
   time: number = 0;
   interval: any;
+  img_clock= "assets/img/clock.png";
 
+  
   constructor() { }
 
   ngOnInit(): void {

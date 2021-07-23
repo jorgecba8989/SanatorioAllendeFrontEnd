@@ -16,7 +16,7 @@ export class AppComponent {
 
 
   constructor( ) {
-    this.board = new Board(5, 5);
+    this.reset()
   }
 
   startTimer() {
@@ -28,4 +28,18 @@ export class AppComponent {
   pauseTimer() {
     clearInterval(this.interval);
   }
+
+  checkCell(cell: Cell) {
+    const result = this.board.checkCell(cell);
+    if (result === 'gameover') {
+      alert('Perdiste :(');
+    } else if (result === 'win') {
+      alert('Ganaste :)');
+    }
+  }
+
+  reset() {
+    this.board = new Board(5,10);
+  }
+
 }

@@ -15,7 +15,9 @@ export class Board {
                 this.cells[y][x] = new Cell(y, x);
             }
         }
-
+        for (let i = 0; i < mines; i++) {
+            this.getRandomCell().mine = true; 
+        }
         for (let y = 0; y < size; y++) {
             for (let x = 0; x < size; x++) {
               let adjacentMines = 0;
@@ -29,11 +31,46 @@ export class Board {
             }
           }
           this.remainingCells = size * size - this.mineCount;
-        }
+    } // fin del constructor
       
-        getRandomCell(): Cell {
-          const y = Math.floor(Math.random() * this.cells.length);
-          const x = Math.floor(Math.random() * this.cells[y].length);
-          return this.cells[y][x];
+    
+    getRandomCell(): Cell {
+        const y = Math.floor(Math.random() * this.cells.length);
+        const x = Math.floor(Math.random() * this.cells[y].length);
+        return this.cells[y][x];
+    }
+        
+    checkCell(cell: Cell): 'gameover' | 'win' | null {
+        if (cell.status !== 'open') {
+            return null;
+        } 
+        else if (cell.mine) {
+            this.revealAll();
+            return 'gameover';
+        } 
+        else {
+            cell.status = 'clear';
+            if(cell.proximityMines === 0) {
+                for(const peer of PEERS) {
+                    if ( this.cells[cell.row + peer[0]] && this.cells[cell.row + peer[0]][cell.column + peer[1]]) {
+                        this.checkCell(this.cells[cell.row + peer[0]][cell.column + peer[1]]);
+                    }
+                }
+            }
+            if (this.remainingCells-- <= 1) {
+                return 'win';
+            }
+            return null;
         }
+    }
+
+    revealAll() {
+        for (const row of this.cells) {
+            for (const cell of row) {
+                if (cell.status === 'open') {
+                    cell.status = 'clear';
+                }
+            }
+        }
+    }
 }  

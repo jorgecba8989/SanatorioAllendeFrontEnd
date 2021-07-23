@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Board } from './game/board';
 import { Cell } from './game/cell';
 import { ClockComponent } from './clock/clock.component';
+import { MensajesService } from './services/mensajes.service';
+
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,7 @@ export class AppComponent {
   @ViewChild(ClockComponent) c: ClockComponent | undefined;
 
 
-  constructor( ) {
+  constructor( private msj: MensajesService ) {
     this.reset()
   }
 
@@ -28,10 +30,10 @@ export class AppComponent {
     const result = this.board.checkCell(cell);
     if (result === 'gameover') {
       this.c?.pauseTimer();
-      alert('Perdiste :(');
+      this.msj.mensajePerdiste("Perdiste :(", "Vuelve a jugar");
     } else if (result === 'win') {
       this.c?.pauseTimer();
-      alert('Ganaste :)');
+      this.msj.mensajeGanaste("Ganaste!!! Felicitaciones :)", "Eres un ganador");
     }
   }
 

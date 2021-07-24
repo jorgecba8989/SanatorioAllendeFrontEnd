@@ -28,4 +28,4 @@
 
 ![](img/error.png "error")
 
-**Si al momento de ejecutar el proyecto le sale un error como figura en la imagen, poner en la terminal del proyecto: <span color="orange">npm install</span>, esperar que se instale y lanzar nuevamente ng serve -o**
+**Si al momento de ejecutar el proyecto le sale un error como figura en la imagen, poner en la terminal del proyecto: *npm install*, esperar que se instale y lanzar nuevamente ng serve -o**

@@ -9,15 +9,31 @@ export class Board {
     mineCount = 0;
 
     constructor(size: number, mines: number) {
+
+    this.initMatriz(size);
+
+    this.assignMines(mines);
+
+    this.countMines(size);
+
+    } 
+
+    initMatriz(size: number){
         for (let y = 0; y < size; y++) {
             this.cells[y] = [];
             for (let x = 0; x < size; x++) {
                 this.cells[y][x] = new Cell(y, x);
             }
         }
+    }
+
+    assignMines(mines:number){
         for (let i = 0; i < mines; i++) {
             this.getRandomCell().mine = true; 
         }
+    }
+
+    countMines(size:number){
         for (let y = 0; y < size; y++) {
             for (let x = 0; x < size; x++) {
               let adjacentMines = 0;
@@ -29,11 +45,10 @@ export class Board {
               this.cells[y][x].proximityMines = adjacentMines;
               if (this.cells[y][x].mine) { this.mineCount++;}
             }
-          }
-          this.remainingCells = size * size - this.mineCount;
-    } // fin del constructor
+        }
+        this.remainingCells = size * size - this.mineCount;
+    }
       
-    
     getRandomCell(): Cell {
         const y = Math.floor(Math.random() * this.cells.length);
         const x = Math.floor(Math.random() * this.cells[y].length);
